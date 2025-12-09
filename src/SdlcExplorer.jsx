@@ -101,9 +101,9 @@ const SdlcExplorer = () => {
       title: "開發 / Agentic Coding",
       description: [
         "Starts writing code through IDE（開發者在 IDE 開始寫程式）",
-        "Suggest and autocomplete code（Agent 提示與自動完成程式碼）",
-        "Code search（程式碼搜尋，用於除錯與重用）",
-        "Translate legacy code（將舊語言程式碼片段翻譯到新語言）"
+        "Suggest and autocomplete code（Agent AI 提示與自動完成程式碼）",
+        "Code search（程式碼搜尋，用於除錯與共用）",
+        "Translate legacy code（將舊語言程式碼片段轉換為新語言）"
       ],
       color: "border-blue-400 bg-blue-50 text-blue-800"
     },
@@ -122,11 +122,11 @@ const SdlcExplorer = () => {
       range: [13, 17],
       title: "程式碼提交與審查 / Agentic Review",
       description: [
-        "Code Commit（程式碼提交）",
-        "Create PR/MR（建立 Pull Request）",
+        "Code Commit（提交程式碼）",
+        "Create PR / MR（建立 Pull Request / Merge Request）",
         "Code review（程式碼審查）",
         "Security review（安全性審查）",
-        "Review suggestions（開發者檢視並接受 Agent 建議）"
+        "Review suggestions（開發者檢視 Agent AI 建議）"
       ],
       color: "border-indigo-400 bg-indigo-50 text-indigo-800"
     },
@@ -143,7 +143,7 @@ const SdlcExplorer = () => {
       range: [23, 25],
       title: "文件與發佈 / Agentic Documentation",
       description: [
-        "Documentation（產生或更新文件）",
+        "Documentation（產出或更新文件）",
         "Release notes（產出版本發佈說明）",
         "Production（佈署到正式環境）"
       ],
@@ -181,7 +181,7 @@ const SdlcExplorer = () => {
     { 
       id: 3, 
       title: "Analyse Code", 
-      titleZh: "分析代碼",
+      titleZh: "分析程式碼",
       type: "agent", 
       icon: Search, 
       category: "Analysis", 
@@ -202,12 +202,12 @@ const SdlcExplorer = () => {
       description: "Developer creates architecture.", 
       descriptionZh: "開發者建立系統架構。",
       details: "High-level structural design.",
-      detailsZh: "高層次的結構設計。"
+      detailsZh: "高層次的結構化設計。"
     },
     { 
       id: 5, 
       title: "Start Coding", 
-      titleZh: "開始編碼",
+      titleZh: "開始撰寫程式",
       type: "developer", 
       icon: Code, 
       category: "Agentic Coding", 
@@ -215,13 +215,13 @@ const SdlcExplorer = () => {
       description: "Implementation begins.", 
       descriptionZh: "開始實作功能。",
       details: "Developer opens IDE with AI context ready.",
-      detailsZh: "開發者開啟 IDE，AI 已準備好上下文資訊。"
+      detailsZh: "開發人員開啟 IDE，AI 已準備好上下文資訊。"
     },
     
     { 
       id: 6, 
       title: "Auto Complete", 
-      titleZh: "智慧補全",
+      titleZh: "自動補全",
       type: "agent", 
       icon: Zap, 
       category: "Agentic Coding", 
@@ -234,28 +234,28 @@ const SdlcExplorer = () => {
     { 
       id: 7, 
       title: "Code Search", 
-      titleZh: "代碼搜尋",
+      titleZh: "程式碼搜尋",
       type: "agent", 
       icon: FileSearch, 
       category: "Troubleshooting", 
       categoryZh: "疑難排解",
       description: "AI finds relevant examples.", 
-      descriptionZh: "AI 尋找相關範例。",
+      descriptionZh: "AI 尋找相關程式範例。",
       details: "Locates patterns within the repo.",
-      detailsZh: "在儲存庫中定位類似的模式。"
+      detailsZh: "在版控儲存庫中找到類似的模式。"
     },
     { 
       id: 8, 
       title: "Translate Legacy", 
-      titleZh: "轉換舊碼",
+      titleZh: "轉換舊程式碼",
       type: "agent", 
       icon: RefreshCw, 
       category: "Migration", 
       categoryZh: "遷移階段",
       description: "Converts old syntax.", 
-      descriptionZh: "轉換舊版語法。",
+      descriptionZh: "轉換舊版程式語法。",
       details: "Refactors legacy code to modern standards.",
-      detailsZh: "將遺留代碼重構為現代標準。"
+      detailsZh: "將遺留的程式碼重構為現代標準。"
     },
     { 
       id: 9, 
@@ -279,7 +279,7 @@ const SdlcExplorer = () => {
       category: "Security", 
       categoryZh: "安全階段",
       description: "Pre-commit vulnerability scan.", 
-      descriptionZh: "提交前漏洞掃描。",
+      descriptionZh: "程式碼提交前的漏洞掃描。",
       details: "Identifies potential security flaws.",
       detailsZh: "識別潛在的安全漏洞。"
     },
@@ -313,15 +313,15 @@ const SdlcExplorer = () => {
     { 
       id: 13, 
       title: "Commit", 
-      titleZh: "提交代碼",
+      titleZh: "提交程式碼",
       type: "system", 
       icon: GitCommit, 
       category: "Version Control", 
       categoryZh: "版本控制",
       description: "Code committed to repo.", 
-      descriptionZh: "代碼提交至儲存庫。",
+      descriptionZh: "程式碼提交至版控儲存庫。",
       details: "Changes saved to VCS.",
-      detailsZh: "變更儲存至版本控制系統。"
+      detailsZh: "將程式碼變更儲存至版本控制系統。"
     },
     { 
       id: 14, 
@@ -332,14 +332,14 @@ const SdlcExplorer = () => {
       category: "Version Control", 
       categoryZh: "版本控制",
       description: "Developer opens Pull Request.", 
-      descriptionZh: "開發者建立拉取請求 (PR)。",
+      descriptionZh: "開發人員建立 Pull Request。",
       details: "Request to merge changes.",
-      detailsZh: "請求將變更合併至主分支。"
+      detailsZh: "請求將變更合併至指定分支。"
     },
     { 
       id: 15, 
       title: "Code Review", 
-      titleZh: "代碼審查",
+      titleZh: "程式碼審查",
       type: "agent", 
       icon: Eye, 
       category: "Review", 
@@ -359,14 +359,14 @@ const SdlcExplorer = () => {
       category: "Security", 
       categoryZh: "安全階段",
       description: "Deep security audit.", 
-      descriptionZh: "深度安全審計。",
+      descriptionZh: "深度安全審查。",
       details: "Cross-module vulnerability check.",
       detailsZh: "跨模組的漏洞檢查。"
     },
     { 
       id: 17, 
       title: "Review & Accept", 
-      titleZh: "審閱並接受",
+      titleZh: "審閱與接受",
       type: "developer", 
       icon: UserCheck, 
       category: "Review", 
@@ -374,12 +374,12 @@ const SdlcExplorer = () => {
       description: "Human sign-off.", 
       descriptionZh: "人工簽核。",
       details: "Developer approves and merges.",
-      detailsZh: "開發者批准並合併代碼。"
+      detailsZh: "開發人員核准並合併程式碼。"
     },
     { 
       id: 18, 
       title: "Push to Staging", 
-      titleZh: "推送 Staging",
+      titleZh: "推送至 Staging",
       type: "system", 
       icon: Server, 
       category: "Deployment", 
@@ -400,7 +400,7 @@ const SdlcExplorer = () => {
       description: "Issue detected in QA.", 
       descriptionZh: "在 QA 中發現問題。",
       details: "Monitoring finds a problem.",
-      detailsZh: "監控系統發現異常。"
+      detailsZh: "監控在系統中發生的問題。"
     },
     { 
       id: 20, 
@@ -425,22 +425,22 @@ const SdlcExplorer = () => {
       category: "Fixing", 
       categoryZh: "修復階段",
       description: "Developer applies fix.", 
-      descriptionZh: "開發者應用修復。",
+      descriptionZh: "開發人員套用修復。",
       details: "Implements patch based on analysis.",
-      detailsZh: "根據分析實作補丁。"
+      detailsZh: "依據分析實作修補程式。"
     },
     { 
       id: 22, 
       title: "Push Fix", 
-      titleZh: "推送修復",
+      titleZh: "推送修補程式",
       type: "system", 
       icon: Upload, 
       category: "Deployment", 
       categoryZh: "部署階段",
       description: "Hotfix deployed.", 
-      descriptionZh: "部署熱修復。",
+      descriptionZh: "部署修補程式。",
       details: "Patch goes through pipeline.",
-      detailsZh: "補丁通過部署流程。"
+      detailsZh: "修補程式通過部署流程。"
     },
     { 
       id: 23, 
@@ -453,18 +453,18 @@ const SdlcExplorer = () => {
       description: "AI updates docs.", 
       descriptionZh: "AI 更新技術文件。",
       details: "Updates API references & Readmes.",
-      detailsZh: "更新 API 參考與 Readme 檔。"
+      detailsZh: "更新 API 參考與 Readme 檔案。"
     },
     { 
       id: 24, 
       title: "Release Notes", 
-      titleZh: "發布說明",
+      titleZh: "發佈說明",
       type: "agent", 
       icon: StickyNote, 
       category: "Release", 
-      categoryZh: "發布階段",
+      categoryZh: "發佈階段",
       description: "Drafts release notes.", 
-      descriptionZh: "起草發布說明。",
+      descriptionZh: "發佈說明草稿。",
       details: "Summarizes changes for users.",
       detailsZh: "為使用者總結變更內容。"
     },
@@ -479,7 +479,7 @@ const SdlcExplorer = () => {
       description: "Live deployment.", 
       descriptionZh: "正式環境部署。",
       details: "Feature available to users.",
-      detailsZh: "功能對使用者開放。"
+      detailsZh: "對使用者開放功能。"
     }
   ];
 
