@@ -2,7 +2,43 @@
 
 簡短說明：這個專案示範 Agentic AI 在軟體開發生命週期（SDLC）中協助開發者的探索性工具與範例介面。
 
+
 內容摘要：
+
+本專案視覺化並展示了 SDLC 中可由 Agent 協助的主要階段與具體項目，摘要如下：
+
+1. 需求 / Backlog
+	- Review feature document（檢視功能文件）
+	- Analyse codebase（分析現有程式碼）
+	- System design（系統設計）
+
+2. 開發 / Agentic Coding
+	- Starts writing code through IDE（開發者在 IDE 開始寫程式）
+	- Suggest and autocomplete code（Agent 提示與自動完成程式碼）
+	- Code search（程式碼搜尋，用於除錯與重用）
+	- Translate legacy code（將舊語言程式碼片段翻譯到新語言）
+
+3. 測試與安全性 / Agentic Testing & Security
+	- Generate unit tests（產生單元測試）
+	- Debug issues（協助除錯問題）
+	- Security Analysis（安全性分析）
+	- Code review preparation（為 Code Review 做準備）
+
+4. 程式碼提交與審查 / Agentic Review
+	- Code Commit（程式碼提交）
+	- Create PR/MR（建立 Pull Request）
+	- Code review（程式碼審查）
+	- Security review（安全性審查）
+	- Review suggestions（開發者檢視並接受 Agent 建議）
+
+5. 部署與維運 / Deployment and Operations
+	- Pushes to non-prod（推送到測試／預備環境）
+	- Bug occurs（在非正式環境中出現錯誤）
+
+6. 文件與發佈 / Agentic Documentation
+	- Documentation（產生或更新文件）
+	- Release notes（產出版本發佈說明）
+	- Production（佈署到正式環境）
 
 快速上手：
 
