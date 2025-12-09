@@ -1,112 +1,81 @@
 # Agentic SDLC Explorer
- 
+
 [![Live demo](https://img.shields.io/badge/Live%20Demo-sdlc.timlai.dev-1e90ff?style=for-the-badge)](https://sdlc.timlai.dev/)
-Short description
--
-This project demonstrates how Agentic AI concepts can assist developers across the Software Development Life Cycle (SDLC). It provides a lightweight front-end example built with Vite + React for quick exploration and extension.
 
-Primary goals
+Introduction
 -
-- Demonstrate how agents (automated assistants) can support requirements, design, implementation, testing, and deployment phases.
-- Provide an executable example UI and reference documents to help developers consider how to adopt agentic workflows in real projects.
+`Agentic SDLC Explorer` is a minimal front-end example (Vite + React) that visualizes how agentic assistants can support developers throughout the Software Development Life Cycle (SDLC).
 
-Highlights
+Goals
 -
-- Simple SPA front-end (Vite + React)
-- Example documentation and flow diagrams in the `ref/` folder
+- Demonstrate agent applications across requirements, design, development, testing, review, and deployment.
+- Provide a runnable example UI and reference materials to help teams explore agentic workflows.
+
+Key features & SDLC scope
+-
+- Requirements / Backlog: review feature documents, analyze the codebase, assist system design.
+- Development / Agentic Coding: IDE-assisted coding, suggestions & autocompletion, code search, legacy code translation.
+- Testing & Security: generate unit tests, assist debugging, perform security analysis, prepare for code review.
+- Commits & Review: create commits and PRs/MRs, assist code and security reviews, offer suggested changes.
+- Deployment & Operations: push to non-production environments, handle staging bugs, support release workflows.
+- Documentation & Release: generate/update docs, produce release notes, assist production deployment tasks.
 
 Quick start
 -
-Install dependencies and run the development server:
+Run the following in the project root:
 
 ```pwsh
 # Install dependencies
 npm install
 
-# Start development (Vite dev server)
+# Start development server (Vite)
 npm run dev
 
 # Build for production
 npm run build
 ```
 
-If you use `pnpm` or `yarn`, use the corresponding commands: `pnpm install` / `pnpm run dev` or `yarn` / `yarn dev`.
+If you prefer `pnpm` or `yarn`, use `pnpm install` / `pnpm run dev` or `yarn` / `yarn dev` respectively.
 
-Project structure (key files)
+Key files
 -
-- `index.html` - Project entry
-- `package.json` - Scripts and dependencies
-- `vite.config.js` - Vite configuration
-- `tailwind.config.js` / `postcss.config.js` - Styling configuration
-- `src/` - Front-end source code
-  - `index.css` - Global styles
-  - `main.jsx` - React entry point
-  - `SdlcExplorer.jsx` - Main component (SDLC Explorer)
-- `ref/` - Documentation and references (including flow diagrams and deployment notes)
+- `index.html` — project entry
+- `package.json` — scripts and dependencies
+- `vite.config.js` — Vite configuration
+- `tailwind.config.js` / `postcss.config.js` — styling configuration
+- `src/` — front-end source
+  - `index.css` — global styles
+  - `main.jsx` — React entry point
+  - `SdlcExplorer.jsx` — main component (SDLC Explorer)
+- `ref/` — reference docs and flow diagrams
 
-SDLC phase summary (Agent-assisted items)
--
-1. Requirements / Backlog
-   - Review feature document
-   - Analyse codebase
-   - System design
-
-2. Development / Agentic Coding
-   - Start writing code in the IDE
-   - Suggest and autocomplete code
-   - Code search (for debugging and reuse)
-   - Translate legacy code to new languages
-
-3. Testing & Security / Agentic Testing & Security
-   - Generate unit tests
-   - Debug issues
-   - Security analysis
-   - Prepare for code review
-
-4. Commits & Review / Agentic Review
-   - Code commit
-   - Create PR/MR
-   - Code review
-   - Security review
-   - Review and accept agent suggestions
-
-5. Deployment & Operations
-   - Push to non-production environments
-   - Handle bugs surfaced in staging/testing
-
-6. Documentation & Release / Agentic Documentation
-   - Generate or update documentation
-   - Produce release notes
-   - Deploy to production
-
-Development scripts (common)
+Common scripts
 -
 - `npm run dev` — start dev server
-- `npm run build` — produce production bundle (`dist/`)
+- `npm run build` — create production bundle (`dist/`)
 - `npm run preview` — preview production build locally (if configured)
 
 Live demo
 -
-- Live demo: https://sdlc.timlai.dev/
+- https://sdlc.timlai.dev/
 
 Deployment suggestions
 -
-This is a static front-end app. Recommended hosts: GitHub Pages, Netlify, or Vercel.
+This is a static front-end app. Recommended hosts:
 
-- GitHub Pages: Deploy `dist/` to `gh-pages` branch or use Actions for automatic deployment
-- Vercel / Netlify: Connect the GitHub repo for automated builds and publishing
+- GitHub Pages — deploy `dist/` to `gh-pages` or use GitHub Actions for automation.
+- Vercel / Netlify — connect the repository for automated builds and publishing.
 
-Contributing & discussion
+Contributing
 -
-Contributions, issues, and PRs are welcome.
-
-- To extend agent features or add backend integrations, add `services/` or `api/` modules
-- To add CI, tests, or linting, include a GitHub Actions workflow
+- Contributions, issues, and PRs are welcome.
+- To extend agent features or add backend integrations, add `services/` or `api/` modules.
+- To add CI, tests, or linting, include a GitHub Actions workflow.
 
 License
 -
-This project is licensed under the MIT License (see `LICENSE`).
+- MIT License (see `LICENSE`).
 
 Contact
 -
-If you need help or want to discuss ideas, please open an issue in the GitHub repository.
+- If you have questions or suggestions, open an issue in the repository.
