@@ -910,7 +910,7 @@ const SdlcExplorer = () => {
                                     <h3 className={`text-2xl font-bold leading-tight mb-1 ${isSelected ? getTextColorClass(node.type) : 'text-slate-600'}`}>
                                         {node.title}
                                     </h3>
-                                    <span className="text-lg block font-medium text-slate-500">
+                                    <span className="text-2xl block font-medium text-slate-500">
                                         {node.titleZh}
                                     </span>
                                 </div>
