@@ -84,6 +84,10 @@ Development scripts (common)
 - `npm run build` — produce production bundle (`dist/`)
 - `npm run preview` — preview production build locally (if configured)
 
+Live demo
+-
+- Live demo: https://sdlc.timlai.dev/
+
 Deployment suggestions
 -
 This is a static front-end app. Recommended hosts: GitHub Pages, Netlify, or Vercel.

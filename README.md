@@ -91,6 +91,10 @@ npm run build
 - `npm run build`：產生 production bundle（`dist/`）
 - `npm run preview`：本機預覽 production build（若有設定）
 
+Demo
+-
+- 線上示範（Live demo）：https://sdlc.timlai.dev/
+
 部署建議
 -
 此專案為靜態前端，建議部署到 GitHub Pages、Netlify 或 Vercel：
