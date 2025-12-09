@@ -1,5 +1,6 @@
 # Agentic SDLC Explorer
-
+ 
+[![Live demo](https://img.shields.io/badge/Live%20Demo-sdlc.timlai.dev-1e90ff?style=for-the-badge)](https://sdlc.timlai.dev/)
 Short description
 -
 This project demonstrates how Agentic AI concepts can assist developers across the Software Development Life Cycle (SDLC). It provides a lightweight front-end example built with Vite + React for quick exploration and extension.

@@ -1,5 +1,7 @@
 # Agentic SDLC Explorer
 
+[![Live demo](https://img.shields.io/badge/Live%20Demo-sdlc.timlai.dev-1e90ff?style=for-the-badge)](https://sdlc.timlai.dev/)
+
 簡短說明：這個專案示範 Agentic AI 在軟體開發生命週期（SDLC）中協助開發者的探索性工具與範例介面。
 
 
