@@ -20,6 +20,8 @@ import {
   ChevronLeft,
   ZoomIn,
   ZoomOut,
+  ChevronUp,
+  ChevronDown,
   // Icons
   ClipboardList,
   Layers,
@@ -75,6 +77,9 @@ const SdlcExplorer = () => {
   
   // State for Zoom
   const [scale, setScale] = useState(1);
+
+  // State for Header Collapse
+  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
 
   // Configuration for the wave layout
   const NODE_WIDTH = 96;   
@@ -563,12 +568,44 @@ const SdlcExplorer = () => {
   };
 
   const scrollToNode = (index) => {
-    if (scrollContainerRef.current) {
-      // Adjust scroll position based on current scale
-      const nodeX = (PADDING_LEFT + index * X_SPACING) * scale;
-      const containerWidth = scrollContainerRef.current.clientWidth;
-      scrollContainerRef.current.scrollTo({
-        left: nodeX - containerWidth / 2,
+    if (!scrollContainerRef.current) return;
+    
+    const container = scrollContainerRef.current;
+    // Base width
+    let viewWidth = container.clientWidth;
+    
+    // Check if panel is open (we have a selected node) and we are on desktop
+    // We check window.innerWidth directly to ensure we match the CSS media query logic
+    const isDesktop = window.innerWidth >= 768; // 768px is 'md' in Tailwind
+    const panelWidth = 480; // w-[480px]
+
+    // If a node is selected, we assume the panel is open/opening
+    if (selectedNode && isDesktop) {
+        viewWidth -= panelWidth;
+    }
+
+    const currentScrollLeft = container.scrollLeft;
+    
+    // Calculate the absolute X position of the node's center
+    const nodeXCenter = (PADDING_LEFT + index * X_SPACING) * scale;
+    
+    // Determine visible bounds within the ADJUSTED view width
+    // The view starts at currentScrollLeft
+    // The "safe" view ends at currentScrollLeft + viewWidth
+    const buffer = 50; 
+    
+    // Check if node is outside the "safe" area (the left part of the screen not covered by panel)
+    const isOutOfView = 
+      nodeXCenter < currentScrollLeft + buffer || 
+      nodeXCenter > currentScrollLeft + viewWidth - buffer;
+
+    if (isOutOfView) {
+      // Center the node within the `viewWidth` (the visible left part)
+      // The center of the visible area is currentScrollLeft + viewWidth / 2
+      // We want nodeXCenter to be at that point.
+      // So newScrollLeft = nodeXCenter - viewWidth / 2
+      container.scrollTo({
+        left: nodeXCenter - viewWidth / 2,
         behavior: 'smooth'
       });
     }
@@ -705,59 +742,96 @@ const SdlcExplorer = () => {
     }, 100);
   };
 
-  // Removed useEffect for auto-scroll on selection
+  // --- Toggle Selection Logic ---
+  const handleNodeClick = (node) => {
+    if (hasDragged.current) return;
+    
+    // Toggle: If clicked node is already selected, deselect it. Otherwise select it.
+    setSelectedNode(prev => (prev?.id === node.id ? null : node));
+  };
+
+  useEffect(() => {
+    if (selectedNode) {
+        const index = nodes.findIndex(n => n.id === selectedNode.id);
+        scrollToNode(index);
+    }
+  }, [selectedNode]);
 
   return (
     <div className="flex flex-col h-screen bg-slate-50 font-sans text-slate-800 overflow-hidden select-none">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row justify-between items-center shadow-sm z-30 shrink-0">
-        <div className="flex items-center gap-3">
-          {/* Custom SVG Icon, no background, directly colored */}
-          <CustomLogoIcon size={40} className="text-blue-600" />
-          
-          <div>
-            <h1 className="text-xl font-bold text-slate-800 flex flex-col md:flex-row md:items-baseline md:gap-2">
-              Agentic AI and SDLC Orchestration
-            </h1>
-          </div>
-        </div>
-        
-        {/* Controls & Legend */}
-        <div className="flex items-center gap-8">
-            {/* Zoom Controls */}
-            <div className="hidden lg:flex items-center gap-2 text-slate-600 text-sm bg-slate-50 px-3 py-1 rounded-lg border border-slate-200 shadow-sm">
-                <button 
-                  onClick={handleZoomIn}
-                  className="p-1 hover:bg-slate-200 rounded transition-colors"
-                  title="Zoom In"
-                >
-                  <ZoomIn size={18} />
-                </button>
-                <span className="text-slate-300">|</span>
-                <button 
-                  onClick={handleZoomOut}
-                  className="p-1 hover:bg-slate-200 rounded transition-colors"
-                  title="Zoom Out"
-                >
-                  <ZoomOut size={18} />
-                </button>
-            </div>
+      <header 
+        className={`
+          bg-white border-b border-slate-200 shadow-sm z-30 shrink-0 relative transition-all duration-300 ease-in-out
+          ${isHeaderCollapsed ? 'py-0 h-0 min-h-0 border-none' : 'px-6 py-4'}
+        `}
+      >
+        <div className={`flex flex-col w-full overflow-hidden transition-all duration-300 ${isHeaderCollapsed ? 'opacity-0 h-0' : 'opacity-100'}`}>
+           <div className="flex flex-col md:flex-row justify-between items-center w-full">
+              <div className="flex items-center gap-3 mb-4 md:mb-0">
+                {/* Custom SVG Icon, no background, directly colored */}
+                <CustomLogoIcon size={40} className="text-blue-600" />
+                
+                <div>
+                  <h1 className="text-xl font-bold text-slate-800 flex flex-col md:flex-row md:items-baseline md:gap-2">
+                    Agentic AI and SDLC Orchestration
+                  </h1>
+                </div>
+              </div>
+              
+              {/* Controls & Legend - Hidden when collapsed */}
+              {!isHeaderCollapsed && (
+                <div className="flex items-center gap-8 animate-in fade-in duration-300">
+                    {/* Zoom Controls */}
+                    <div className="hidden lg:flex items-center gap-2 text-slate-600 text-sm bg-slate-50 px-3 py-1 rounded-lg border border-slate-200 shadow-sm">
+                        <button 
+                          onClick={handleZoomIn}
+                          className="p-1 hover:bg-slate-200 rounded transition-colors"
+                          title="Zoom In"
+                        >
+                          <ZoomIn size={18} />
+                        </button>
+                        <span className="text-slate-300">|</span>
+                        <button 
+                          onClick={handleZoomOut}
+                          className="p-1 hover:bg-slate-200 rounded transition-colors"
+                          title="Zoom Out"
+                        >
+                          <ZoomOut size={18} />
+                        </button>
+                    </div>
 
-            <div className="flex flex-wrap gap-6 text-lg font-semibold bg-slate-50 px-6 py-3 rounded-full border border-slate-100">
-            <div className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded-full bg-green-500"></div> 
-                Developer
-            </div>
-            <div className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded-full bg-red-500"></div> 
-                System
-            </div>
-            <div className="flex items-center gap-3">
-                <div className="w-4 h-4 rounded-full bg-blue-500"></div> 
-                Agentic AI
-            </div>
-            </div>
+                    <div className="flex flex-wrap gap-6 text-lg font-semibold bg-slate-50 px-6 py-3 rounded-full border border-slate-100">
+                    <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 rounded-full bg-green-500"></div> 
+                        Developer
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 rounded-full bg-red-500"></div> 
+                        System
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 rounded-full bg-blue-500"></div> 
+                        Agentic AI
+                    </div>
+                    </div>
+                </div>
+              )}
+           </div>
         </div>
+
+        {/* Collapse/Expand Button at Bottom Right of Header */}
+        <button 
+          onClick={() => setIsHeaderCollapsed(!isHeaderCollapsed)}
+          className={`
+            absolute right-4 bg-white border border-slate-200 shadow-md p-1.5 rounded-full hover:bg-slate-50 transition-all z-40
+            ${isHeaderCollapsed ? 'top-2' : 'bottom-0 translate-y-1/2'} 
+          `}
+          title={isHeaderCollapsed ? "Expand Header" : "Collapse Header"}
+        >
+          {isHeaderCollapsed ? <ChevronDown size={16} className="text-slate-500" /> : <ChevronUp size={16} className="text-slate-500" />}
+        </button>
+
       </header>
 
       {/* Main Content Area - Canvas */}
@@ -886,10 +960,7 @@ const SdlcExplorer = () => {
                             )}
 
                             <button
-                                onClick={(e) => {
-                                    // Only select if not dragging
-                                    if (!hasDragged.current) setSelectedNode(node);
-                                }}
+                                onClick={(e) => handleNodeClick(node)}
                                 className={`
                                     w-24 h-24 rounded-full 
                                     ${getColorStyles(node.type, isSelected)}
@@ -910,7 +981,7 @@ const SdlcExplorer = () => {
                                     <h3 className={`text-2xl font-bold leading-tight mb-1 ${isSelected ? getTextColorClass(node.type) : 'text-slate-600'}`}>
                                         {node.title}
                                     </h3>
-                                    <span className="text-2xl block font-medium text-slate-500">
+                                    <span className="text-lg block font-medium text-slate-500">
                                         {node.titleZh}
                                     </span>
                                 </div>
